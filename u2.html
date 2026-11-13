@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>02 출신과 국적 · 스페인어 기말고사 대비</title>
+<meta name="description" content="출신과 국적 — ¿De dónde eres? 핵심 문법, 어휘, 동사 활용, 대화, 퀴즈">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;650&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<main>
+<section class="hero" style="padding-bottom:18px">
+  <div class="wrap">
+    <span class="eyebrow">Unidad 02</span>
+    <h1 style="font-size:clamp(28px,5vw,48px)">출신과 국적</h1>
+    <p class="es" style="font-size:clamp(18px,2.6vw,25px);color:var(--brand);margin:10px 0 0;font-style:italic">¿De dónde eres?</p>
+    <p class="lead" style="margin-top:14px">· 나라와 국적, 사용하는 언어 말하기<br>· 국적 형용사의 성과 수 맞추기<br>· 색깔과 숫자로 사물 표현하기</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top:14px">
+  <div class="wrap">
+    <div class="tabs">
+      <button class="on" data-pane="p-gram">핵심 문법</button>
+      <button data-pane="p-vocab">어휘</button>
+      <button data-pane="p-verb">동사 활용</button>
+      <button data-pane="p-dlg">대화</button>
+      <button data-pane="p-fc">플래시카드</button>
+      <button data-pane="p-drill">집중 연습</button>
+      <button data-pane="p-quiz">단원 퀴즈 <span class="pill hot">33</span></button>
+    </div>
+
+    <div class="pane on" id="p-gram"><div id="gram"></div></div>
+    <div class="pane" id="p-vocab"><div id="vocab"></div></div>
+    <div class="pane" id="p-verb"><div id="verbs"></div></div>
+    <div class="pane" id="p-dlg"><div id="dlgs"></div></div>
+    <div class="pane" id="p-fc">
+      <div class="tabs" data-group="fc" style="margin-bottom:18px">
+        <button class="on" data-pane="fc-w">단어 카드</button>
+        <button data-pane="fc-s">문장 카드</button>
+      </div>
+      <div class="pane on" data-group="fc" id="fc-w"><div id="flashW"></div></div>
+      <div class="pane" data-group="fc" id="fc-s"><div id="flashS"></div></div>
+    </div>
+    <div class="pane" id="p-drill">
+      <div class="tabs" data-group="dr" style="margin-bottom:18px">
+        <button class="on" data-pane="dr-x">단원 집중</button>
+        <button data-pane="dr-d">받아쓰기</button>
+        <button data-pane="dr-m">짝 맞추기</button>
+      </div>
+      <div class="pane on" data-group="dr" id="dr-x">
+<div class="card" style="margin-bottom:18px">
+  <h3 style="font-size:18px;margin-bottom:12px">색깔 — 형태 변화까지 확인하기</h3>
+  <div class="grid g4" id="colors"></div>
+  <div class="callout" style="margin-top:16px">
+    <b>-o형</b>(blanco, amarillo, rojo, negro)은 여성형 -a, 복수 -s/-as.
+    <b>불변형</b>(azul, verde, gris, marrón)은 남녀 같고 복수는 azules, verdes, grises, marrones.
+    <b>rosa · naranja · violeta</b>는 복수형을 쓰지 않아도 된다.
+  </div>
+</div>
+<div class="card" style="margin-bottom:18px">
+  <h3 style="font-size:18px;margin-bottom:6px">숫자 0~20</h3>
+  <p style="color:var(--ink-3);font-size:13.5px;margin-top:0">카드를 누르면 발음을 들려줍니다.</p>
+  <div class="numgrid" id="nums"></div>
+  <div class="callout" style="margin-top:16px"><b>dieciséis</b>에만 강세 기호가 있습니다. 16~19는 모두 한 단어로 붙여 씁니다.</div>
+</div>
+<div class="card" style="margin-bottom:18px">
+  <h3 style="font-size:18px;margin-bottom:6px">수도로 나라 맞히기</h3>
+  <p style="color:var(--ink-3);font-size:13.5px;margin-top:0">Si vives en ____, ¿de dónde eres?</p>
+  <div id="capQuiz"></div>
+</div>
+<div class="card" style="margin-bottom:18px">
+  <h3 style="font-size:18px;margin-bottom:12px">인물의 출신과 국적</h3>
+  <table class="mtab"><thead><tr><th>인물</th><th>출신(ser de)</th><th>국적</th><th>언어</th></tr></thead><tbody id="famous"></tbody></table>
+</div>
+<div class="card">
+  <h3 style="font-size:18px;margin-bottom:12px">숫자와 색깔 말하기</h3>
+  <table class="mtab"><thead><tr><th>질문</th><th>대답</th></tr></thead><tbody id="numcol"></tbody></table>
+</div></div>
+      <div class="pane" data-group="dr" id="dr-d"><div id="dict"></div></div>
+      <div class="pane" data-group="dr" id="dr-m"><div id="match"></div></div>
+    </div>
+    <div class="pane" id="p-quiz"><div id="quiz"></div></div>
+
+    <div style="display:flex;gap:10px;margin-top:38px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid var(--line);padding-top:22px">
+      <a class="btn" href="u1.html">← 01 인사와 자기소개</a>
+      <a class="btn pri" href="u3.html">03 직업과 일하는 장소 →</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/quiz.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+const I = window.ISB, $=I.$, esc=I.esc, say=I.say;
+I.buildShell();
+const u = window.DATA.units[1];
+
+I.renderGrammar($('#gram'), u.grammar);
+I.renderVocab($('#vocab'), u.vocab, u.id);
+I.renderVerbs($('#verbs'), u.verbs);
+I.renderDialogs($('#dlgs'), u.dialogs);
+const words = I.unitPairs(u), sents = I.unitSentences(u);
+I.renderFlash($('#flashW'), words, u.id);
+I.renderFlash($('#flashS'), sents, u.id+'s');
+I.renderDictation($('#dict'), sents);
+I.renderMatch($('#match'), words);
+I.renderQuiz($('#quiz'), window.QUIZ[u.id], {save:'quiz-'+u.id});
+I.initTabs();
+
+/* 색깔 */
+const COLORMAP={blanco:'#ffffff',amarillo:'#F5C518',naranja:'#E8762C',rosa:'#EE93B4',rojo:'#CE2B37',violeta:'#7B4BA8',azul:'#1E63B8',verde:'#2E8B57','marrón':'#7A4A24',gris:'#9AA0A6',negro:'#1B1B1B'};
+$('#colors').innerHTML = u.vocab.find(g=>g.group==='색깔').items.map(it=>{
+  const key=it[0].split(' / ')[0];
+  return '<div class="card colorcard" data-say="'+esc(key)+'" style="cursor:pointer">'+
+   '<div class="swatch" style="background:'+(COLORMAP[key]||'#ccc')+'"></div>'+
+   '<b>'+esc(it[0])+'</b><span>'+esc(it[1])+'</span></div>';
+}).join('');
+/* 숫자 */
+$('#nums').innerHTML = u.vocab.find(g=>g.group==='숫자 0~20').items.map(it=>
+  '<div class="numcard" data-say="'+esc(it[0])+'"><i>'+esc(it[1])+'</i><b>'+esc(it[0])+'</b></div>').join('');
+/* 수도 퀴즈 */
+(function(){
+  const caps=I.shuffle(u.capitals);
+  $('#capQuiz').innerHTML = caps.map((c,ci)=>
+    '<div class="exline" style="align-items:center"><button class="play" data-say="Si vives en '+esc(c[0])+', ¿de dónde eres?">▶</button>'+
+    '<div class="txt" style="flex:1"><b>Si vives en '+esc(c[0])+'…</b></div>'+
+    '<button class="btn sm" data-rev="'+ci+'">정답</button>'+
+    '<b class="es" style="display:none;color:var(--teal);min-width:120px" id="cap'+ci+'">Soy de '+esc(c[1])+'.</b></div>').join('');
+  $('#capQuiz').addEventListener('click',e=>{
+    const r=e.target.closest('[data-rev]');
+    if(r){ const b=$('#cap'+r.dataset.rev); b.style.display='inline'; r.style.display='none'; say(b.textContent); }
+  });
+})();
+/* 인물 */
+$('#famous').innerHTML = u.famous.map(f=>
+  '<tr><td>'+esc(f[0])+'</td><td class="es">es de '+esc(f[1])+'</td><td class="es">es '+esc(f[2])+'</td><td class="es">el '+esc(f[3])+'</td></tr>').join('');
+/* 숫자-색깔 */
+$('#numcol').innerHTML = u.numColors.map(nc=>
+  '<tr><td class="es">¿De qué color es el '+esc(nc[0])+'?</td><td class="es" style="color:var(--teal)">El '+esc(nc[0])+' es '+esc(nc[1])+'.</td></tr>').join('');
+document.querySelector('#dr-x').addEventListener('click',e=>{
+  const s=e.target.closest('[data-say]'); if(s) say(s.dataset.say);
+});
+
+
+
+</script>
+</body>
+</html>

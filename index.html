@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>스페인어 기말고사 대비 · 2026학년도 1학년 2학기</title>
+<meta name="description" content="인사와 자기소개, 출신과 국적, 직업과 일하는 장소, 집과 사물의 위치 — 수업 자료 그대로 복습하고 퀴즈로 점검하는 기말고사 대비 사이트">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;650&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">2026학년도 1학년 2학기</span>
+    <h1>기말고사, <em>네 단원</em>만<br>정확히 잡으면 끝납니다.</h1>
+    <p class="lead">수업에서 쓴 PPT 422장을 단원별 핵심 문법·어휘·대화로 다시 정리했습니다.
+      듣고 말하고, 빈칸을 채우고, 틀린 문제만 다시 풀면서 시험 범위를 한 번에 훑어 보세요.</p>
+    <div class="hero-cta">
+      <a class="btn pri" href="#units">단원별 학습 시작</a>
+      <a class="btn" href="exam.html">종합 모의고사 60문제</a>
+      <a class="btn ghost" href="cheatsheet.html">시험 직전 한 장 정리</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="grid g4" id="stats"></div>
+  </div>
+</section>
+
+<section class="block" id="units">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><h2>시험 범위</h2><p>각 단원은 핵심 문법 · 어휘 · 동사 활용 · 대화 · 연습 · 단원 퀴즈로 구성되어 있습니다.</p></div>
+    </div>
+    <div class="grid g2" id="unitCards"></div>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap grid g2">
+    <div class="card">
+      <h3 style="font-family:var(--serif);font-weight:500;font-size:24px;margin-bottom:4px">4일 완성 학습 계획</h3>
+      <p style="color:var(--ink-3);font-size:14px;margin:0 0 16px">체크하면 이 브라우저에 저장됩니다.</p>
+      <div id="plan"></div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <h3 style="font-family:var(--serif);font-weight:500;font-size:22px;margin-bottom:12px">시험에 꼭 나오는 다섯 가지</h3>
+        <ol style="margin:0;padding-left:20px;font-size:14.5px;line-height:1.9;color:var(--ink-2)">
+          <li><b>성·수 일치</b> — buenos días / buenas tardes, colombiano·colombiana·colombianos·colombianas</li>
+          <li><b>ser · estar · hay · tener</b> — 특징 / 위치 / 존재 / 소유</li>
+          <li><b>al = a + el, del = de + el</b> — al lado del ayuntamiento</li>
+          <li><b>tú와 usted</b> — te llamas ↔ se llama, tu ↔ su</li>
+          <li><b>동사 현재형 6인칭</b> — ser, estar, tener, hablar, vivir, trabajar, llamarse</li>
+        </ol>
+      </div>
+      <div class="callout">
+        <b>음성 기능 안내</b> — 스페인어 문장 옆 ▶ 버튼을 누르면 원어민에 가까운 발음으로 읽어 줍니다.
+        상단 ⏱ 버튼으로 말하기 속도를 조절할 수 있어요.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>마무리 점검 질문</h2><p>짝과 질문을 주고받으며 한 문장씩 대답해 보세요.</p></div></div>
+    <div class="grid g3" id="wrap6"></div>
+  </div>
+</section>
+</main>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/quiz.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+const {$, el, esc, store, say, buildShell} = window.ISB;
+buildShell();
+const D = window.DATA;
+
+/* 단원 카드 */
+const host = $('#unitCards');
+D.units.forEach((u,ui)=>{
+  const pairs = window.ISB.unitPairs(u);
+  const kn = store.known();
+  const knCount = Object.keys(kn).filter(k=>k.startsWith(u.id+'-')).length;
+  const total = pairs.length;
+  const vocabPct = total? Math.min(100, Math.round(knCount/total*100)) : 0;
+  const quizPct = store.score('quiz-'+u.id);
+  const pct = Math.round((vocabPct*0.5 + quizPct*0.5));
+  const a = el('a','unit');
+  a.href = 'u'+(ui+1)+'.html';
+  a.innerHTML =
+    '<div class="num">'+u.num+'</div>'+
+    '<h3>'+esc(u.title)+'</h3>'+
+    '<div class="q es">'+esc(u.es)+'</div>'+
+    '<div class="tag">'+esc(u.tag)+' · 어휘 '+total+'개 · 문제 '+(window.QUIZ[u.id]||[]).length+'개</div>'+
+    '<div class="bar"><i style="width:'+pct+'%"></i></div>'+
+    '<div class="pct"><span>진도 '+pct+'%</span><span>어휘 '+vocabPct+'% · 퀴즈 '+quizPct+'점</span></div>';
+  host.appendChild(a);
+});
+
+/* 통계 */
+(function(){
+  const kn = Object.keys(store.known()).length;
+  let totalV=0; D.units.forEach(u=>totalV+=window.ISB.unitPairs(u).length);
+  const scores = D.units.map(u=>store.score('quiz-'+u.id));
+  const avg = Math.round(scores.reduce((a,b)=>a+b,0)/scores.length);
+  const ex = store.score('quiz-exam');
+  const done = Object.keys(store.checks()).length;
+  const items = [
+    [kn, '외운 어휘 (전체 '+totalV+')'],
+    [avg+'점', '단원 퀴즈 평균'],
+    [ex?ex+'점':'—', '모의고사 최고점'],
+    [done+'/16', '학습 계획 완료']
+  ];
+  $('#stats').innerHTML = items.map(i=>'<div class="stat"><b>'+i[0]+'</b><span>'+i[1]+'</span></div>').join('');
+})();
+
+/* 학습 계획 */
+(function(){
+  const plan = [
+    ['d1a','1일차 · 01단원 핵심 문법 + 어휘 플래시카드','인사말 성·수, cómo/cuál, tú/usted'],
+    ['d1b','1일차 · 01단원 대화 2개 소리 내어 읽기','이름 묻기, 친구 소개'],
+    ['d1c','1일차 · 01단원 퀴즈 풀기','25문제'],
+    ['d1d','1일차 · llamarse 활용 빈칸 연습',''],
+    ['d2a','2일차 · 02단원 나라·국적 어휘 외우기','유럽·아메리카·아시아·아프리카·오세아니아'],
+    ['d2b','2일차 · 국적 형용사 성·수 변화 정리','-o/-a, -ense, -í, 불변형'],
+    ['d2c','2일차 · 색깔 + 숫자 0~20 암기',''],
+    ['d2d','2일차 · 02단원 퀴즈 풀기','33문제'],
+    ['d3a','3일차 · 직업 어휘 8그룹 훑기',''],
+    ['d3b','3일차 · 일하는 장소 어휘 + trabajar en',''],
+    ['d3c','3일차 · 직업↔장소 연결 연습',''],
+    ['d3d','3일차 · 03단원 퀴즈 풀기','30문제'],
+    ['d4a','4일차 · 위치 표현 15개 + 고양이 문장',''],
+    ['d4b','4일차 · ser·estar·hay·tener 구별 집중',''],
+    ['d4c','4일차 · 04단원 퀴즈 풀기','33문제'],
+    ['d4e','시험 전날 · 종합 모의고사 + 한 장 정리','60문제']
+  ];
+  const h = $('#plan');
+  const c = store.checks();
+  h.innerHTML = plan.map(p=>
+    '<label class="check'+(c[p[0]]?' done':'')+'" data-id="'+p[0]+'">'+
+    '<input type="checkbox" '+(c[p[0]]?'checked':'')+'>'+
+    '<span class="lbl">'+esc(p[1])+(p[2]?'<small>'+esc(p[2])+'</small>':'')+'</span></label>').join('');
+  h.addEventListener('change',e=>{
+    const lab=e.target.closest('.check');
+    const on=store.toggleCheck(lab.dataset.id);
+    lab.classList.toggle('done',on);
+    const n=Object.keys(store.checks()).length;
+    const st=$('#stats').children[3]; if(st) st.querySelector('b').textContent=n+'/16';
+  });
+})();
+
+/* 마무리 질문 */
+$('#wrap6').innerHTML = D.wrapup.map(w=>
+  '<div class="card" style="padding:18px;cursor:pointer" data-say="'+esc(w[0])+'">'+
+  '<div class="es" style="font-size:19px;font-weight:500;color:var(--brand)">'+esc(w[0])+'</div>'+
+  '<div style="font-size:13.5px;color:var(--ink-3);margin-top:5px">'+esc(w[1])+'</div></div>').join('');
+$('#wrap6').addEventListener('click',e=>{
+  const c=e.target.closest('[data-say]'); if(c) say(c.dataset.say);
+});
+</script>
+</body>
+</html>

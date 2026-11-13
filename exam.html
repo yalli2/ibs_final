@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>종합 모의고사 · 스페인어 기말고사 대비</title>
+<meta name="description" content="4개 단원 전체 범위에서 문항을 뽑아 푸는 종합 모의고사">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;650&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<main>
+<section class="hero" style="padding-bottom:16px">
+  <div class="wrap">
+    <span class="eyebrow">Examen final</span>
+    <h1 style="font-size:clamp(28px,5vw,48px)">종합 모의고사</h1>
+    <p class="lead">네 단원 전체에서 문항을 섞어 뽑습니다. 틀린 문제는 끝에 해설과 함께 모아 보여 주고, 그 문제만 다시 풀 수 있습니다.</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top:10px">
+  <div class="wrap">
+    <div class="card" id="setup" style="max-width:720px;margin:0 auto">
+      <h3 style="font-size:19px;margin-bottom:14px">시험 설정</h3>
+      <p style="font-size:13px;color:var(--ink-3);margin:0 0 7px;font-weight:600">출제 범위</p>
+      <div class="chips" id="scope" style="margin-bottom:18px">
+        <button class="chip on" data-s="all">전체 4단원</button>
+        <button class="chip" data-s="u1">01 인사</button>
+        <button class="chip" data-s="u2">02 출신</button>
+        <button class="chip" data-s="u3">03 직업</button>
+        <button class="chip" data-s="u4">04 집·위치</button>
+      </div>
+      <p style="font-size:13px;color:var(--ink-3);margin:0 0 7px;font-weight:600">문항 수</p>
+      <div class="chips" id="count" style="margin-bottom:18px">
+        <button class="chip" data-c="20">20문항</button>
+        <button class="chip on" data-c="40">40문항</button>
+        <button class="chip" data-c="60">60문항</button>
+        <button class="chip" data-c="999">전체</button>
+      </div>
+      <p style="font-size:13px;color:var(--ink-3);margin:0 0 7px;font-weight:600">타이머</p>
+      <div class="chips" id="timer" style="margin-bottom:22px">
+        <button class="chip on" data-t="0">없음</button>
+        <button class="chip" data-t="15">15분</button>
+        <button class="chip" data-t="30">30분</button>
+        <button class="chip" data-t="45">45분</button>
+      </div>
+      <button class="btn pri" id="startBtn" style="width:100%;padding:14px">시험 시작</button>
+      <p style="font-size:12.5px;color:var(--ink-3);margin:12px 0 0">선택형은 A·B·C·D 키, 주관식은 Enter로 빠르게 풀 수 있습니다. 최고 점수는 홈 화면에 기록됩니다.</p>
+    </div>
+
+    <div id="runner" style="display:none">
+      <div style="max-width:720px;margin:0 auto 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span class="pill" id="scopeLabel"></span>
+        <span class="timer" id="clock" style="margin-left:auto"></span>
+        <button class="btn sm" id="quitBtn">설정으로</button>
+      </div>
+      <div id="quiz"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/quiz.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+const I=window.ISB, $=I.$, $$=I.$$;
+I.buildShell();
+let scope='all', count=40, mins=0, tick=null;
+
+function chipGroup(sel, cb){
+  $$('#'+sel+' .chip').forEach(b=>b.onclick=()=>{
+    $$('#'+sel+' .chip').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); cb(b);
+  });
+}
+chipGroup('scope', b=>scope=b.dataset.s);
+chipGroup('count', b=>count=+b.dataset.c);
+chipGroup('timer', b=>mins=+b.dataset.t);
+
+const LABEL={all:'전체 4단원',u1:'01 인사와 자기소개',u2:'02 출신과 국적',u3:'03 직업과 일하는 장소',u4:'04 집과 사물의 위치'};
+
+$('#startBtn').onclick=()=>{
+  let pool = scope==='all'
+    ? Object.keys(window.QUIZ).flatMap(k=>window.QUIZ[k])
+    : window.QUIZ[scope].slice();
+  const n = Math.min(count, pool.length);
+  $('#setup').style.display='none';
+  $('#runner').style.display='block';
+  $('#scopeLabel').textContent = LABEL[scope]+' · '+n+'문항';
+  I.renderQuiz($('#quiz'), pool, {count:n, save: scope==='all'&&n>=40 ? 'quiz-exam' : null});
+  startClock();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+$('#quitBtn').onclick=()=>{
+  if(tick) clearInterval(tick);
+  document.onkeydown=null;
+  $('#runner').style.display='none'; $('#setup').style.display='block';
+};
+
+function startClock(){
+  const c=$('#clock');
+  if(tick) clearInterval(tick);
+  let s = mins? mins*60 : 0;
+  const up = !mins;
+  const fmt=v=>String(Math.floor(v/60)).padStart(2,'0')+':'+String(v%60).padStart(2,'0');
+  c.textContent = fmt(s);
+  tick = setInterval(()=>{
+    s = up? s+1 : s-1;
+    c.textContent = fmt(Math.max(0,s));
+    c.classList.toggle('warn', !up && s<=120);
+    if(!up && s<=0){ clearInterval(tick); I.toast('시간이 끝났습니다'); }
+  },1000);
+}
+</script>
+</body>
+</html>

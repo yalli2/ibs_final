@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>04 집과 사물의 위치 · 스페인어 기말고사 대비</title>
+<meta name="description" content="집과 사물의 위치 — La tienda está al lado del ayuntamiento. 핵심 문법, 어휘, 동사 활용, 대화, 퀴즈">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;650&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<main>
+<section class="hero" style="padding-bottom:18px">
+  <div class="wrap">
+    <span class="eyebrow">Unidad 04</span>
+    <h1 style="font-size:clamp(28px,5vw,48px)">집과 사물의 위치</h1>
+    <p class="es" style="font-size:clamp(18px,2.6vw,25px);color:var(--brand);margin:10px 0 0;font-style:italic">La tienda está al lado del ayuntamiento.</p>
+    <p class="lead" style="margin-top:14px">· 위치 표현으로 사물의 자리 설명하기<br>· 집과 방의 모습, 소유와 존재 표현하기<br>· ser · estar · hay · tener를 구별하기</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top:14px">
+  <div class="wrap">
+    <div class="tabs">
+      <button class="on" data-pane="p-gram">핵심 문법</button>
+      <button data-pane="p-vocab">어휘</button>
+      <button data-pane="p-verb">동사 활용</button>
+      <button data-pane="p-dlg">대화</button>
+      <button data-pane="p-fc">플래시카드</button>
+      <button data-pane="p-drill">집중 연습</button>
+      <button data-pane="p-quiz">단원 퀴즈 <span class="pill hot">33</span></button>
+    </div>
+
+    <div class="pane on" id="p-gram"><div id="gram"></div></div>
+    <div class="pane" id="p-vocab"><div id="vocab"></div></div>
+    <div class="pane" id="p-verb"><div id="verbs"></div></div>
+    <div class="pane" id="p-dlg"><div id="dlgs"></div></div>
+    <div class="pane" id="p-fc">
+      <div class="tabs" data-group="fc" style="margin-bottom:18px">
+        <button class="on" data-pane="fc-w">단어 카드</button>
+        <button data-pane="fc-s">문장 카드</button>
+      </div>
+      <div class="pane on" data-group="fc" id="fc-w"><div id="flashW"></div></div>
+      <div class="pane" data-group="fc" id="fc-s"><div id="flashS"></div></div>
+    </div>
+    <div class="pane" id="p-drill">
+      <div class="tabs" data-group="dr" style="margin-bottom:18px">
+        <button class="on" data-pane="dr-x">단원 집중</button>
+        <button data-pane="dr-d">받아쓰기</button>
+        <button data-pane="dr-m">짝 맞추기</button>
+      </div>
+      <div class="pane on" data-group="dr" id="dr-x">
+<div class="card" style="margin-bottom:18px">
+  <h3 style="font-size:18px;margin-bottom:6px">고양이로 익히는 위치 표현 15문장</h3>
+  <p style="color:var(--ink-3);font-size:13.5px;margin-top:0">문장을 누르면 발음을 들려줍니다. ▶ 전체 듣기로 한 번에 들을 수도 있어요.</p>
+  <div style="display:flex;gap:8px;margin:10px 0 14px"><button class="btn sm pri" id="catAll">▶ 전체 듣기</button><button class="btn sm" id="catStop">■ 정지</button></div>
+  <div id="cats"></div>
+</div>
+<div class="card">
+  <h3 style="font-size:18px;margin-bottom:6px">ser · estar · hay · tener 골라 쓰기</h3>
+  <p style="color:var(--ink-3);font-size:13.5px;margin-top:0">빈칸에 알맞은 동사를 눌러 보세요.</p>
+  <div id="seht"></div>
+</div></div>
+      <div class="pane" data-group="dr" id="dr-d"><div id="dict"></div></div>
+      <div class="pane" data-group="dr" id="dr-m"><div id="match"></div></div>
+    </div>
+    <div class="pane" id="p-quiz"><div id="quiz"></div></div>
+
+    <div style="display:flex;gap:10px;margin-top:38px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid var(--line);padding-top:22px">
+      <a class="btn" href="u3.html">← 03 직업과 일하는 장소</a>
+      <a class="btn pri" href="exam.html">종합 모의고사 →</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/quiz.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+const I = window.ISB, $=I.$, esc=I.esc, say=I.say;
+I.buildShell();
+const u = window.DATA.units[3];
+
+I.renderGrammar($('#gram'), u.grammar);
+I.renderVocab($('#vocab'), u.vocab, u.id);
+I.renderVerbs($('#verbs'), u.verbs);
+I.renderDialogs($('#dlgs'), u.dialogs);
+const words = I.unitPairs(u), sents = I.unitSentences(u);
+I.renderFlash($('#flashW'), words, u.id);
+I.renderFlash($('#flashS'), sents, u.id+'s');
+I.renderDictation($('#dict'), sents);
+I.renderMatch($('#match'), words);
+I.renderQuiz($('#quiz'), window.QUIZ[u.id], {save:'quiz-'+u.id});
+I.initTabs();
+
+
+
+$('#cats').innerHTML = u.catPos.map(c=>
+  '<div class="exline"><button class="play" data-say="'+esc(c[0])+'">▶</button>'+
+  '<div class="txt"><b>'+esc(c[0])+'</b><span>'+esc(c[1])+'</span></div></div>').join('');
+$('#cats').addEventListener('click',e=>{const s=e.target.closest('[data-say]');if(s)say(s.dataset.say);});
+$('#catAll').onclick=()=>I.TTS.queue(u.catPos.map(c=>({text:c[0],gap:500})));
+$('#catStop').onclick=()=>I.TTS.stop();
+/* ser/estar/hay/tener 연습 */
+(function(){
+  const items=[
+    ['Mi habitación ___ grande.','es','방의 특징 → ser'],
+    ['La cocina ___ al lado del comedor.','está','특정 장소의 위치 → estar'],
+    ['En mi habitación ___ una cama.','hay','존재 → hay'],
+    ['Mi habitación ___ una ventana.','tiene','갖추고 있음 → tener'],
+    ['Los libros ___ en la mesa.','están','특정 복수 주어의 위치 → estar'],
+    ['___ dos sillas en la sala.','Hay','존재 → hay'],
+    ['Las paredes ___ verdes.','son','특징(복수) → ser'],
+    ['Yo ___ una habitación grande.','tengo','소유 → tener'],
+    ['¿Dónde ___ el baño?','está','위치를 물음 → estar'],
+    ['¿Qué ___ al fondo del pasillo?','hay','존재를 물음 → hay']
+  ];
+  const opts=['es','son','está','están','hay','tiene','tengo','Hay','soy'];
+  $('#seht').innerHTML = items.map((it,ii)=>
+    '<div class="exline" style="flex-direction:column;align-items:stretch;gap:8px">'+
+    '<b class="es" style="font-size:16.5px">'+esc(it[0])+'</b>'+
+    '<div class="chips" data-i="'+ii+'">'+['es','son','está','están','hay','tiene','tengo'].map(o=>
+      '<button class="chip" data-o="'+o+'">'+o+'</button>').join('')+'</div>'+
+    '<span id="sr'+ii+'" style="font-size:13.5px;display:none"></span></div>').join('');
+  $('#seht').addEventListener('click',e=>{
+    const b=e.target.closest('[data-o]'); if(!b)return;
+    const i=+b.closest('[data-i]').dataset.i, want=items[i][1].toLowerCase();
+    const ok = b.dataset.o.toLowerCase()===want;
+    b.style.background = ok?'var(--teal)':'var(--brand)'; b.style.color='#fff'; b.style.borderColor='transparent';
+    const r=$('#sr'+i); r.style.display='block';
+    r.style.color = ok?'var(--teal)':'var(--brand)';
+    r.textContent = (ok?'✓ ':'✗ 정답은 '+items[i][1]+' — ')+items[i][2];
+    if(ok) say(items[i][0].replace('___',items[i][1]));
+  });
+})();
+
+</script>
+</body>
+</html>

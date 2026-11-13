@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>03 직업과 일하는 장소 · 스페인어 기말고사 대비</title>
+<meta name="description" content="직업과 일하는 장소 — ¿A qué te dedicas? 핵심 문법, 어휘, 동사 활용, 대화, 퀴즈">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;650&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<main>
+<section class="hero" style="padding-bottom:18px">
+  <div class="wrap">
+    <span class="eyebrow">Unidad 03</span>
+    <h1 style="font-size:clamp(28px,5vw,48px)">직업과 일하는 장소</h1>
+    <p class="es" style="font-size:clamp(18px,2.6vw,25px);color:var(--brand);margin:10px 0 0;font-style:italic">¿A qué te dedicas?</p>
+    <p class="lead" style="margin-top:14px">· 직업을 소개하고 일하는 장소 말하기<br>· 직업과 관련된 행동 표현하기<br>· 직업 명사의 성 구별하기</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top:14px">
+  <div class="wrap">
+    <div class="tabs">
+      <button class="on" data-pane="p-gram">핵심 문법</button>
+      <button data-pane="p-vocab">어휘</button>
+      <button data-pane="p-verb">동사 활용</button>
+      <button data-pane="p-dlg">대화</button>
+      <button data-pane="p-fc">플래시카드</button>
+      <button data-pane="p-drill">집중 연습</button>
+      <button data-pane="p-quiz">단원 퀴즈 <span class="pill hot">30</span></button>
+    </div>
+
+    <div class="pane on" id="p-gram"><div id="gram"></div></div>
+    <div class="pane" id="p-vocab"><div id="vocab"></div></div>
+    <div class="pane" id="p-verb"><div id="verbs"></div></div>
+    <div class="pane" id="p-dlg"><div id="dlgs"></div></div>
+    <div class="pane" id="p-fc">
+      <div class="tabs" data-group="fc" style="margin-bottom:18px">
+        <button class="on" data-pane="fc-w">단어 카드</button>
+        <button data-pane="fc-s">문장 카드</button>
+      </div>
+      <div class="pane on" data-group="fc" id="fc-w"><div id="flashW"></div></div>
+      <div class="pane" data-group="fc" id="fc-s"><div id="flashS"></div></div>
+    </div>
+    <div class="pane" id="p-drill">
+      <div class="tabs" data-group="dr" style="margin-bottom:18px">
+        <button class="on" data-pane="dr-x">단원 집중</button>
+        <button data-pane="dr-d">받아쓰기</button>
+        <button data-pane="dr-m">짝 맞추기</button>
+      </div>
+      <div class="pane on" data-group="dr" id="dr-x">
+<div class="card" style="margin-bottom:18px">
+  <h3 style="font-size:18px;margin-bottom:12px">직업 ↔ 일하는 장소</h3>
+  <table class="mtab"><thead><tr><th>직업</th><th>장소</th><th>뜻</th></tr></thead><tbody id="jp"></tbody></table>
+</div>
+<div class="card">
+  <h3 style="font-size:18px;margin-bottom:12px">직업별 하는 일</h3>
+  <table class="mtab"><thead><tr><th>주어</th><th>동작</th><th>뜻</th></tr></thead><tbody id="ja"></tbody></table>
+  <div class="callout" style="margin-top:16px">
+    <b>hacer</b> → hago / hace · <b>dar</b> → doy / da. 주어가 여럿이면 <b>tocan, conducen, cantan</b>처럼 복수형을 씁니다.
+  </div>
+</div></div>
+      <div class="pane" data-group="dr" id="dr-d"><div id="dict"></div></div>
+      <div class="pane" data-group="dr" id="dr-m"><div id="match"></div></div>
+    </div>
+    <div class="pane" id="p-quiz"><div id="quiz"></div></div>
+
+    <div style="display:flex;gap:10px;margin-top:38px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid var(--line);padding-top:22px">
+      <a class="btn" href="u2.html">← 02 출신과 국적</a>
+      <a class="btn pri" href="u4.html">04 집과 사물의 위치 →</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/quiz.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+const I = window.ISB, $=I.$, esc=I.esc, say=I.say;
+I.buildShell();
+const u = window.DATA.units[2];
+
+I.renderGrammar($('#gram'), u.grammar);
+I.renderVocab($('#vocab'), u.vocab, u.id);
+I.renderVerbs($('#verbs'), u.verbs);
+I.renderDialogs($('#dlgs'), u.dialogs);
+const words = I.unitPairs(u), sents = I.unitSentences(u);
+I.renderFlash($('#flashW'), words, u.id);
+I.renderFlash($('#flashS'), sents, u.id+'s');
+I.renderDictation($('#dict'), sents);
+I.renderMatch($('#match'), words);
+I.renderQuiz($('#quiz'), window.QUIZ[u.id], {save:'quiz-'+u.id});
+I.initTabs();
+
+
+$('#jp').innerHTML = u.jobPlace.map(j=>
+  '<tr><td class="es">'+esc(j[0])+'</td><td class="es">'+esc(j[1])+'</td><td style="color:var(--ink-3);font-size:13.5px">'+esc(j[2])+'</td></tr>').join('');
+$('#ja').innerHTML = u.jobAction.map(j=>
+  '<tr><td class="es">'+esc(j[0])+'</td><td class="es" style="color:var(--teal)">'+esc(j[1])+'</td><td style="color:var(--ink-3);font-size:13.5px">'+esc(j[2])+'</td></tr>').join('');
+$('#dr-x').addEventListener('click',e=>{
+  const tr=e.target.closest('tr'); if(tr) say(tr.children[0].textContent+' '+tr.children[1].textContent);
+});
+
+
+</script>
+</body>
+</html>
